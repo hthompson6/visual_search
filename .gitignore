@@ -1,5 +1,7 @@
 .DS_STORE
+.cursor*
 node_modules
+bun.lock
 scripts/flow/*/.flowconfig
 .flowconfig
 *~
