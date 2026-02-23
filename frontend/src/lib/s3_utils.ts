@@ -8,5 +8,3 @@ const client = new S3Client({
 
 
 export function fetchPresigned() {};
-
-

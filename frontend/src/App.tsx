@@ -1,39 +1,26 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { APITester } from "./view/APITester";
-import "./index.css";
+/**
+ * This file is the entry point for the React app, it sets up the root
+ * element and renders the App component to the DOM.
+ *
+ * It is included in `src/index.html`.
+ */
 
-import logo from "./logo.svg";
-import reactLogo from "./react.svg";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { VisualSearch } from "./components/feature/VisualSearch";
 
-export function App() {
-  return (
-    <div className="container mx-auto p-8 text-center relative z-10">
-      <div className="flex justify-center items-center gap-8 mb-8">
-        <img
-          src={logo}
-          alt="Bun Logo"
-          className="h-36 p-6 transition-all duration-300 hover:drop-shadow-[0_0_2em_#646cffaa] scale-120"
-        />
-        <img
-          src={reactLogo}
-          alt="React Logo"
-          className="h-36 p-6 transition-all duration-300 hover:drop-shadow-[0_0_2em_#61dafbaa] [animation:spin_20s_linear_infinite]"
-        />
-      </div>
-      <Card>
-        <CardHeader className="gap-4">
-          <CardTitle className="text-3xl font-bold">Bun + React</CardTitle>
-          <CardDescription>
-            Edit <code className="rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono">src/App.tsx</code> and save to
-            test HMR
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <APITester />
-        </CardContent>
-      </Card>
-    </div>
-  );
+const elem = document.getElementById("root")!;
+const app = (
+  <StrictMode>
+    <VisualSearch />
+  </StrictMode>
+);
+
+if (import.meta.hot) {
+  // With hot module reloading, `import.meta.hot.data` is persisted.
+  const root = (import.meta.hot.data.root ??= createRoot(elem));
+  root.render(app);
+} else {
+  // The hot module reloading API is not available in production.
+  createRoot(elem).render(app);
 }
-
-export default App;
